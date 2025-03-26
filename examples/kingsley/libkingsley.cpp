@@ -54,5 +54,22 @@ inline static TheCustomHeapType * getCustomHeap() {
 #pragma warning(disable:4273)
 #endif
 
-//#include "wrappers/wrapper.cpp"
+#include "wrappers/wrapper.cpp"
 
+extern "C" {
+  void * xxmalloc (size_t sz) {
+    return getCustomHeap()->malloc(sz);
+  }
+
+  void xxfree (void * ptr) {
+    getCustomHeap()->free(ptr);
+  }
+
+  //void * xxmemalign(size_t alignment, size_t sz) {
+  //  return nullptr;
+  //}
+
+  //size_t xxmalloc_usable_size (void * ptr) {
+  //  return 0;
+  //}
+}
